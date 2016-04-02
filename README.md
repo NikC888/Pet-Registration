@@ -1,8 +1,8 @@
-#### BasicStructure
+#### Pet Registration
 
-### Date
+### April 2,2016
 
-Basic structure for future projects
+A registration system for pets.
 
 * Git
 * Java 7
