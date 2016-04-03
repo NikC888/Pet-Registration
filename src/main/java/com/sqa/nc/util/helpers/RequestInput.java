@@ -34,10 +34,10 @@ public class RequestInput {
 	public static boolean getBoolean (String question) {
 		// Local variable to hold input
 		String input;
-		// Infinit loop to look out for Yes and No valid options
+		// Infinite loop to look out for Yes and No valid options
 		while (true) {
 			// Ask the user a question to get relative input
-			System.out.print(question + " (Yes/Y) or (No/N):");
+			System.out.print(question + "(Yes/Y) or (No/N): ");
 			// Set the input based on what the user enters on their keyboard
 			Scanner scanner = new Scanner(System.in);
 			input = scanner.nextLine();
@@ -69,7 +69,7 @@ public class RequestInput {
 		// Local variable to hold input
 		String input;
 		char character = ' ';
-		// Infinit loop to look out for valid options
+		// Infinite loop to look out for valid options
 		while (true) {
 			try {
 				// Ask the user a question to get relative input
@@ -344,42 +344,37 @@ public class RequestInput {
 	/**
 	 * @param question
 	 * @param cancelMessage
-	 * @param bird
-	 * @param cat
-	 * @param dog
-	 * @param fish
-	 * @param horse
-	 * @param reptile
 	 * @return
 	 */
-	public static boolean getString (String question, String cancelMessage, Enum... acceptableEnum) {
+	public static String getString (String question, String cancelMessage, Enum... acceptableEnum) {
 		boolean validWord = false;
 		String resultValue;
-		// boolean willCancel = false;
+		String resultString = "";
 		String input = null;
 		scanner = new Scanner(System.in);
 		while (true) {
 			try {
 				System.out.print(question);
 				input = scanner.nextLine();
+				resultValue = input;
 				for (int i = 0; i < acceptableEnum.length; i++) {
 					if (input.trim().equalsIgnoreCase(acceptableEnum[i].toString())) {
 						validWord = true;
+						resultString += acceptableEnum[i].toString();
 					}
 				}
 				if (!validWord) {
 					throw new InvalidAcceptableWordException();
 				}
-				return true;
+				return resultString;
 			} catch (InvalidAcceptableWordException e) {
 				System.out.println("You have not provided an acceptable word (" + input + ")");
 				System.out.println("\tPlease choose from: " + Arrays.toString(acceptableEnum));
 				String message = String.format(cancelMessage, input);
-				// System.out.print(message);
-				System.out.print(message + "\nTo cancel, enter '*' or anything else to continue: ");
+				System.out.print(message + "\nTo cancel this registration, enter '*' or anything else to try again: ");
 				input = scanner.nextLine();
 				if (input.equals("*"))
-					return false;
+					return resultString;
 			}
 		}
 	}
